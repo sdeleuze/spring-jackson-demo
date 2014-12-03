@@ -28,9 +28,10 @@ public class MessageService {
 	private final List<Message> messages = new ArrayList<>();
 
 	public MessageService() {
-		User brian = new User(1L, "Brian", "Clozel", "bclozel@pivotal.io", "1 Jaures street", "69003", "Lyon", "France");
-		User stephane = new User(2L, "Stéphane", "Nicoll", "snicoll@pivotal.io", "42 Obama street", "1000", "Brussel", "Belgium");
-		User rossen = new User(3L, "Rossen", "Stoyanchev", "rstoyanchev@pivotal.io", "3 Warren street", "10011", "New York", "USA");
+		Group authors = new Group("authors");
+		User brian = new User(1L, "Brian", "Clozel", "bclozel@pivotal.io", "1 Jaures street", "69003", "Lyon", "France", authors);
+		User stephane = new User(2L, "Stéphane", "Nicoll", "snicoll@pivotal.io", "42 Obama street", "1000", "Brussel", "Belgium", authors);
+		User rossen = new User(3L, "Rossen", "Stoyanchev", "rstoyanchev@pivotal.io", "3 Warren street", "10011", "New York", "USA", authors);
 
 		Message info = new Message(1L, "Info", "This is an information message", brian, stephane, rossen);
 		Message warning = new Message(2L, "Warning", "This is a warning message", stephane, rossen);

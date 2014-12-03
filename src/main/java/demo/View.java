@@ -18,7 +18,10 @@ package demo;
 
 public class View {
 
+	interface UserToGroup {}
+	interface GroupToUser {}
 	interface Summary {}
 	interface SummaryWithRecipients extends Summary {}
+	interface Full extends SummaryWithRecipients, UserToGroup {}
 
 }

@@ -39,6 +39,7 @@ public class Message {
 	@JsonView(View.SummaryWithRecipients.class)
 	private List<User> recipients;
 
+	@JsonView(View.Full.class)
 	private String body;
 
 

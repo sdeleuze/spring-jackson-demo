@@ -23,23 +23,35 @@ public class User {
 	@JsonView(View.Summary.class)
 	private Long id;
 
+	@JsonView(View.UserToGroup.class)
+	private Group group;
+
 	@JsonView(View.Summary.class)
 	private String firstname;
 
 	@JsonView(View.Summary.class)
 	private String lastname;
 
+	@JsonView(View.Full.class)
 	private String email;
+
+	@JsonView(View.Full.class)
 	private String address;
+
+	@JsonView(View.Full.class)
 	private String postalCode;
+
+	@JsonView(View.Full.class)
 	private String city;
+
+	@JsonView(View.Full.class)
 	private String country;
 
 	public User() {
 	}
 
 	public User(Long id, String firstname, String lastname, String email, String address,
-			String postalCode, String city, String country) {
+			String postalCode, String city, String country, Group group) {
 		this.id = id;
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -48,6 +60,7 @@ public class User {
 		this.postalCode = postalCode;
 		this.city = city;
 		this.country = country;
+		setGroup(group);
 	}
 
 	public Long getId() {
@@ -112,5 +125,37 @@ public class User {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		group.addUser(this);
+		this.group = group;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		User user = (User) o;
+
+		if (!id.equals(user.id)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		return id.hashCode();
 	}
 }

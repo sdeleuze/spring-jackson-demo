@@ -45,11 +45,13 @@ public class MessageController {
 		return messageService.getAll();
 	}
 
+	@JsonView(View.Full.class)
 	@RequestMapping("/{id}")
 	public Message getMessage(@PathVariable Long id) {
 		return this.messageService.get(id);
 	}
 
+	@JsonView(View.Full.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public Message create(@RequestBody Message message) {
 		return this.messageService.create(message);
