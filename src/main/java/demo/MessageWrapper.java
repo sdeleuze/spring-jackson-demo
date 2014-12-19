@@ -16,10 +16,30 @@
 
 package demo;
 
-public class View {
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.annotation.JsonView;
 
-	interface Summary {}
-	interface SummaryWithRecipients extends Summary {}
-	interface Other {}
+/**
+ * @author Sebastien Deleuze
+ */
+public class MessageWrapper {
+
+	@JsonUnwrapped
+	private Message message;
+
+	public MessageWrapper() {
+	}
+
+	public MessageWrapper(Message message) {
+		this.message = message;
+	}
+
+	public void setMessage(Message message) {
+		this.message = message;
+	}
+
+	public Message getMessage() {
+		return message;
+	}
 
 }

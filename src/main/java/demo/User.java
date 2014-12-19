@@ -29,10 +29,19 @@ public class User {
 	@JsonView(View.Summary.class)
 	private String lastname;
 
+	@JsonView(View.Other.class)
 	private String email;
+
+	@JsonView(View.Other.class)
 	private String address;
+
+	@JsonView(View.Other.class)
 	private String postalCode;
+
+	@JsonView(View.Other.class)
 	private String city;
+
+	@JsonView(View.Other.class)
 	private String country;
 
 	public User() {

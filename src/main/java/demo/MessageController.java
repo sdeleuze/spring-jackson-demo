@@ -16,15 +16,15 @@
 
 package demo;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonView;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.Resource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -35,24 +35,21 @@ public class MessageController {
 
 	@JsonView(View.Summary.class)
 	@RequestMapping("/")
-	public List<Message> getAllMessages() {
-		return messageService.getAll();
+	public ResponseEntity<Message> getMessage() {
+		return new ResponseEntity<Message>(this.messageService.get(1L), HttpStatus.OK);
 	}
 
-	@JsonView(View.SummaryWithRecipients.class)
-	@RequestMapping("/with-recipients")
-	public List<Message> getAllMessagesWithRecipients() {
-		return messageService.getAll();
+	@JsonView(View.Summary.class)
+	@RequestMapping("/resource")
+	public ResponseEntity<Resource<Message>> getMessageResource() {
+		return new ResponseEntity<Resource<Message>>(new Resource<Message>(this.messageService.get(1L), new Link("http://sample.com")), HttpStatus.OK);
 	}
 
-	@RequestMapping("/{id}")
-	public Message getMessage(@PathVariable Long id) {
-		return this.messageService.get(id);
+	@RequestMapping("/resource-full")
+	public ResponseEntity<Resource<Message>> getMessageResourceFull() {
+		return new ResponseEntity<Resource<Message>>(new Resource<Message>(this.messageService.get(1L), new Link("http://sample.com")), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public Message create(@RequestBody Message message) {
-		return this.messageService.create(message);
-	}
+
 
 }

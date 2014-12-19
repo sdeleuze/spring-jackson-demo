@@ -16,10 +16,27 @@
 
 package demo;
 
-public class View {
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
-	interface Summary {}
-	interface SummaryWithRecipients extends Summary {}
-	interface Other {}
+/**
+ * @author Sebastien Deleuze
+ */
+public class Wrapper <T> {
 
+	private T content;
+
+	public Wrapper() {
+	}
+
+	public Wrapper(T content) {
+		this.content = content;
+	}
+
+	public void setContent(T content) {
+		this.content = content;
+	}
+
+	public T getContent() {
+		return content;
+	}
 }
